@@ -4481,7 +4481,44 @@ resource cleanup when possible.
   end
   ```
 
+## Rails
+* <a name="dont_use_before_action_to_load_data"></a>
+  Following the rule of _"don't sacrify clarity for the sake of DRY-ness"_
+  make Controller actions to be full readable without the need of jumping
+  to the filters to understand the whole logic.
 
+  Use before filters to do what they do best: halting the request cycle. They should not be used for data loading and preparing state. 
+<sup>[[link](#dont_use_before_action_to_load_data)]</sup>
+  ```ruby
+  # bad
+  class TreesController
+    before_action :find_tree
+
+    def show
+    end
+
+    private
+
+    def find_tree
+      @tree = Tree.find(params[:id])
+    end
+  end
+
+  # good
+  class TreesController
+    def show
+      @tree = find_tree
+    end
+
+    private
+
+    def find_tree
+      Tree.find(params[:id])
+    end
+  end
+  ```
+
+  [Read this article](http://craftingruby.com/posts/2015/05/31/dont-use-before-action-to-load-data.html).
 ## Misc
 
 * <a name="always-warn"></a>
