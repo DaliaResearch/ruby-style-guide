@@ -1297,11 +1297,6 @@ Translations of the guide are available in the following languages:
   if x > 10
     # body omitted
   end
-
-  # good - exception: if there are many conditions
-  if(x > 10 || y < 100)
-    # body omitted
-  end
   ```
 
 Note that there is an exception to this rule, namely [safe assignment in
