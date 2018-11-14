@@ -4448,7 +4448,7 @@ resource cleanup when possible.
   Be strict on the test organization to make to others easy read the test.
   Be descriptive with the name of the variables. Use `_1`, `_2` fuffix when multiple
   instances been created.
-<sup>[[link](#native-testing-tools)]</sup>
+<sup>[[link](#tests-organization)]</sup>
   ```ruby
   # bad
   def test_method
@@ -4475,6 +4475,38 @@ resource cleanup when possible.
     assert(alien_1.winner?)
   end
   ```
+
+* <a name="avoid-stubs"></a>
+  When mocking methods try to use `expects.at_least_once` instead of `stubs`. The reason is that `stubs` won't complain
+  if the stubbed method is never called and this can be a problem. Also if the implementation changes and
+  the method is not called any more the test will keep the stubbed declaration even when it is not necessary
+  any more, becoming _dead code_.
+<sup>[[link](#avoid-stubs)]</sup>
+  ```ruby
+
+  # bad
+  def test_my_method
+    # context setup
+    alien = Factory.alien
+
+    # expectations
+    alien.stubs(:my_stubbed_method)
+
+    # assertions
+    assert("RESULT", alien.my_method)
+  end
+
+  # good
+  def test_my_method
+    # context setup
+    alien = Factory.alien
+
+    # expectations
+    alien.expects(:my_stubbed_method).at_least_once
+
+    # assertions
+    assert("RESULT", alien.my_method)
+  end
 
 
 ## Misc
