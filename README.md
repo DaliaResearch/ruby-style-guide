@@ -4446,7 +4446,7 @@ resource cleanup when possible.
 
 * <a name="tests-organization"></a>
   Be strict on the test organization to make to others easy read the test.
-  Be descriptive with the name of the variables. Use `_1`, `_2` fuffix when multiple
+  Be descriptive with the name of the variables. Use `_1`, `_2` suffix when multiple
   instances been created.
 <sup>[[link](#tests-organization)]</sup>
   ```ruby
