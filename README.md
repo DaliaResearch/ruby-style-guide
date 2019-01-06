@@ -93,6 +93,7 @@ Translations of the guide are available in the following languages:
 * [Percent Literals](#percent-literals)
 * [Metaprogramming](#metaprogramming)
 * [Testing](#testing)
+* [Commit Conventions](#commit-conventions)
 * [Misc](#misc)
 * [Tools](#tools)
 
@@ -4509,6 +4510,58 @@ resource cleanup when possible.
     assert("RESULT", alien.my_method)
   end
 
+## Commit Conventions
+* <a name="commit-titles"></a>
+  Don't be lazy writting commit titles. Be descriptive and be sure the
+  wording can be helpful when we are doing a search in the future.
+<sup>[[link](#commit-titles)]</sup>
+
+  ```text
+  # bad (Not use of capitalized first letter, the content is too ambigious)
+  fix bug
+
+  # good
+  Fix bug that did not allow to writte proper Commit titles
+
+  - Check Card here: https://trello.com/cards/123232
+
+* <a name="commit-titles-coherence"></a>
+  In the case the new commit has a simmilar commit in the past try to related both of them
+  maybe trying to use a similar title
+<sup>[[link](#commit-titles-coherence)]</sup>
+
+  ```text
+  # good
+  # commit 1
+  Upgrading client gem
+
+  # commit 2
+  Upgrading client gem
+
+  # commit 3
+  Upgrading client gem
+
+* <a name="commit-atomic"></a>
+  Commit, as far is possible, should be atomic. They should content all the needed changes.
+  So don't try to divide a new functionality in different commits like one commit for part of the
+  changes, another commit for another part of the changes, another commit for the tests..
+
+  This allows other developers to review a past commit to look for information of what was needed
+  to implement the functionality.
+
+  Also helps in case we need to do a rollback.
+<sup>[[link](#commit-atomic)]</sup>
+
+* <a name="commit-unique-purpose"></a>
+  Commit, as far is possible, should content changes related to only one purpose.
+
+  If you are implementing a new feature, and in the process of doing so you discover a bug, create
+  two separate commits, one of the new feature and another for fixing the bug.
+
+  This will have several possitive impacts. Specially for the person that is doing the code review to
+  help her to differentiate what are the changes related to the new functionality and what are the changes
+  related to the other activity.
+<sup>[[link](#commit-unique-purpose)]</sup>
 
 ## Misc
 
