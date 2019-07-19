@@ -96,6 +96,7 @@ Translations of the guide are available in the following languages:
 * [Commit Conventions](#commit-conventions)
 * [Misc](#misc)
 * [Tools](#tools)
+* [Active Record](#active-record)
 
 ## Source Code Layout
 
@@ -4648,6 +4649,44 @@ and has good Emacs integration.
 [RubyMine](http://www.jetbrains.com/ruby/)'s code inspections are
 [partially based](http://confluence.jetbrains.com/display/RUBYDEV/RubyMine+Inspections)
 on this guide.
+
+## Active Record
+
+Agreements and suggestions related to Active Record
+
+* <a name="bang-operators"></a>
+  Use [bang operators](https://riptutorial.com/ruby-on-rails/example/9285/activerecord-bang-----methods) in Active Record entities manipulation.
+  <sup>[[link](#bang-operators)]</sup>
+
+  If our intention is to modify/create an entity and we don't have an expected scenario
+  where the command should fail we should use _bang operators_. This way if the command is failing the error won't be quietly ignored.
+
+  If our intention is to fetch an existing record and we don't have an expected scenario
+  that the record may not exists we should also use the _bang operators_. This way if the fetching if failing we get a proper
+  `NotFound` error and not an ambiguous `NotMethod for nil` error in a further random line.
+
+
+  ```ruby
+  # bad
+  MyModel.create
+  MyModel.take
+  MyModel.first
+  MyModel.last
+  MyModel.find_by
+  MyModel.find_or_create_by
+  my_model.save
+  my_model.update
+
+  # good
+  MyModel.create!
+  MyModel.take!
+  MyModel.first!
+  MyModel.last!
+  MyModel.find_by!
+  MyModel.find_or_create_by!
+  my_model.save!
+  my_model.update!
+  ```
 
 # Contributing
 
